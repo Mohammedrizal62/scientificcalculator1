@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10131d">
+<title>Scientific Calculator</title>
+<style>
+:root{color-scheme:dark;--bg:#10131d;--panel:#191e2b;--key:#252c3d;--key-hover:#323b50;--text:#f5f7ff;--muted:#8e9ab2;--accent:#8b7cff;--accent2:#a79bff;--line:#2b3345}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 0,#26234c 0,transparent 52%),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text)}.calculator{width:min(100%,440px);padding:24px;border:1px solid #34394c;border-radius:28px;background:linear-gradient(150deg,#1d2231,#171b27 72%);box-shadow:0 28px 80px #0008}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.brand{font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#c5c9d8}.badge{font-size:11px;color:#bdb4ff;background:#8b7cff20;border:1px solid #8b7cff55;padding:6px 9px;border-radius:99px}.display{min-height:116px;padding:20px 18px 14px;margin-bottom:16px;border:1px solid var(--line);border-radius:18px;background:#10141e;display:flex;flex-direction:column;justify-content:flex-end;text-align:right;overflow:hidden}.expression{min-height:23px;color:var(--muted);font-size:15px;white-space:nowrap;overflow-x:auto;scrollbar-width:none}.result{margin-top:8px;font-size:clamp(34px,10vw,48px);font-weight:600;letter-spacing:-.045em;white-space:nowrap;overflow-x:auto;scrollbar-width:none}.toolbar{display:flex;gap:8px;margin:0 0 12px}.tool{flex:1;padding:9px 6px;border:1px solid var(--line);border-radius:10px;background:transparent;color:#b6bfd2;font-size:12px;cursor:pointer}.tool:hover,.tool.active{border-color:#8174e8;color:#c9c2ff;background:#8b7cff16}.keys{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}.key{min-height:56px;border:1px solid transparent;border-radius:14px;background:var(--key);color:var(--text);font:500 17px inherit;cursor:pointer;transition:background .15s,transform .08s,border-color .15s}.key:hover{background:var(--key-hover);border-color:#ffffff12}.key:active{transform:scale(.96)}.key.fn{font-size:14px;color:#c8c0ff;background:#282643}.key.fn:hover{background:#35315a}.key.op{color:#c1baff;background:#302c50;font-size:20px}.key.muted{color:#a2acc0}.key.danger{color:#ff9eaa;background:#432833}.key.equals{background:var(--accent);color:white;font-size:22px;box-shadow:0 7px 20px #8b7cff35}.key.equals:hover{background:var(--accent2)}.key.zero{grid-column:span 2}.hint{text-align:center;color:#77839b;font-size:11px;margin:16px 0 0}.hint kbd{font:inherit;padding:2px 5px;border:1px solid #394154;border-radius:4px;color:#aeb8cd}@media(max-width:380px){.calculator{padding:17px;border-radius:23px}.keys{gap:7px}.key{min-height:51px;border-radius:12px}.toolbar{gap:6px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="calculator" aria-label="Scientific calculator">
+  <div class="top"><div class="brand">Scientific</div><div class="badge">DEG</div></div>
+  <section class="display" aria-live="polite" aria-atomic="true"><div class="expression" id="expression"></div><div class="result" id="result">0</div></section>
+  <div class="toolbar"><button class="tool" id="angle" title="Toggle degrees or radians">DEG</button><button class="tool" data-action="memory-clear">MC</button><button class="tool" data-action="memory-recall">MR</button><button class="tool" data-action="memory-add">M+</button><button class="tool" data-action="memory-subtract">M−</button></div>
+  <div class="keys" id="keys">
+    <button class="key fn" data-value="sin(" aria-label="sine">sin</button><button class="key fn" data-value="cos(" aria-label="cosine">cos</button><button class="key fn" data-value="tan(" aria-label="tangent">tan</button><button class="key fn" data-value="log(" aria-label="base 10 logarithm">log</button><button class="key fn" data-value="ln(" aria-label="natural logarithm">ln</button>
+    <button class="key fn" data-value="asin(" aria-label="inverse sine">sin⁻¹</button><button class="key fn" data-value="acos(" aria-label="inverse cosine">cos⁻¹</button><button class="key fn" data-value="atan(" aria-label="inverse tangent">tan⁻¹</button><button class="key fn" data-value="sqrt(" aria-label="square root">√</button><button class="key fn" data-value="^2" aria-label="square">x²</button>
+    <button class="key fn" data-value="π">π</button><button class="key fn" data-value="e">e</button><button class="key fn" data-value="^" aria-label="power">xʸ</button><button class="key fn" data-value="(" >(</button><button class="key fn" data-value=")">)</button>
+    <button class="key muted" data-action="clear">AC</button><button class="key muted" data-action="delete">DEL</button><button class="key fn" data-value="!">n!</button><button class="key op" data-value="/">÷</button><button class="key op" data-value="*">×</button>
+    <button class="key" data-value="7">7</button><button class="key" data-value="8">8</button><button class="key" data-value="9">9</button><button class="key op" data-value="-">−</button><button class="key op" data-value="+">+</button>
+    <button class="key" data-value="4">4</button><button class="key" data-value="5">5</button><button class="key" data-value="6">6</button><button class="key fn" data-value="%">%</button><button class="key fn" data-value="Ans">Ans</button>
+    <button class="key" data-value="1">1</button><button class="key" data-value="2">2</button><button class="key" data-value="3">3</button><button class="key fn" data-value="±">±</button><button class="key equals" data-action="equals">=</button>
+    <button class="key zero" data-value="0">0</button><button class="key" data-value=".">.</button><button class="key fn" data-value="^(-1)" aria-label="reciprocal">1/x</button><button class="key fn" data-value="abs(" aria-label="absolute value">abs</button>
+  </div>
+  <p class="hint">Keyboard supported · <kbd>Enter</kbd> calculate · <kbd>Esc</kbd> clear</p>
+</main>
+<script>
+(()=>{
+ const exprEl=document.querySelector('#expression'),resultEl=document.querySelector('#result'),angleBtn=document.querySelector('#angle');let expression='',answer=0,memory=0,degrees=true,justEvaluated=false;
+ const render=()=>{exprEl.textContent=expression;resultEl.textContent=expression||'0'};
+ const insert=value=>{if(justEvaluated&&!/[+\-*/^%!)]/.test(value)&&!value.endsWith('('))expression='';justEvaluated=false;expression+=value;render()};
+ const factorial=n=>{if(n<0||!Number.isInteger(n)||n>170)throw Error();let x=1;for(let i=2;i<=n;i++)x*=i;return x};
+ function calculate(source){if(!source.trim())return 0;let s=source.replace(/π/g,'PI').replace(/Ans/g,'ANS').replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-');
+   s=s.replace(/(\d+(?:\.\d+)?|\bPI\b|\bE\b|\bANS\b|\))(?=(?:PI|E|ANS|\d|\(|sin|cos|tan|asin|acos|atan|sqrt|log|ln|abs))/g,'$1*');
+   s=s.replace(/(PI|E|ANS)/g,(_,k)=>({PI:'Math.PI',E:'Math.E',ANS:'answer'}[k]));
+   s=s.replace(/\b(sin|cos|tan|asin|acos|atan|sqrt|log|ln|abs)\(/g,(_,fn)=>'F.'+fn+'(').replace(/\^/g,'**').replace(/(\d+(?:\.\d+)?|Math\.PI|Math\.E|answer|\))!/g,'F.fact($1)');
+   if(!/^[\d+\-*/().,%\sA-Za-z]*$/.test(s)||/\b(?:constructor|window|document|globalThis|Function|eval|import)\b/.test(s))throw Error();
+   const F={sin:x=>Math.sin(degrees?x*Math.PI/180:x),cos:x=>Math.cos(degrees?x*Math.PI/180:x),tan:x=>Math.tan(degrees?x*Math.PI/180:x),asin:x=>degrees?Math.asin(x)*180/Math.PI:Math.asin(x),acos:x=>degrees?Math.acos(x)*180/Math.PI:Math.acos(x),atan:x=>degrees?Math.atan(x)*180/Math.PI:Math.atan(x),sqrt:Math.sqrt,log:Math.log10,ln:Math.log,abs:Math.abs,fact:factorial};
+   const value=Function('F','answer','return ('+s+')')(F,answer);if(!Number.isFinite(value))throw Error();return value;
+ }
+ function equals(){try{let value=calculate(expression);answer=value;let shown=Number(value.toPrecision(12)).toString();exprEl.textContent=expression+' =';resultEl.textContent=shown;expression=shown;justEvaluated=true}catch{resultEl.textContent='Error';justEvaluated=true}}
+ document.querySelector('#keys').addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;let a=b.dataset.action,v=b.dataset.value;if(a==='clear'){expression='';justEvaluated=false;render()}else if(a==='delete'){expression=expression.slice(0,-1);justEvaluated=false;render()}else if(a==='equals')equals();else if(v==='±'){if(expression)expression=expression.startsWith('-')?expression.slice(1):'-('+expression+')';render()}else if(v)insert(v)});
+ document.querySelector('.toolbar').addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;if(b.id==='angle'){degrees=!degrees;b.textContent=degrees?'DEG':'RAD';document.querySelector('.badge').textContent=degrees?'DEG':'RAD';return}try{if(b.dataset.action==='memory-clear')memory=0;if(b.dataset.action==='memory-recall')insert(String(memory));if(b.dataset.action==='memory-add')memory+=calculate(expression);if(b.dataset.action==='memory-subtract')memory-=calculate(expression)}catch{}});
+ document.addEventListener('keydown',e=>{if(/^[0-9.]$/.test(e.key))insert(e.key);else if(['+','-','*','/','^','(',')','%','!'].includes(e.key))insert(e.key);else if(e.key==='Enter'||e.key==='='){e.preventDefault();equals()}else if(e.key==='Backspace'){expression=expression.slice(0,-1);render()}else if(e.key==='Escape'){expression='';render()}});
+ render();
+})();
+</script>
+</body>
+</html>
